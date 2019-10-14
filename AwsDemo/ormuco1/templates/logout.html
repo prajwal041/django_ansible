@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block logout %}
+
+    <h2>You are logged out!</h2>
+    <p>Click <a href="/">here</a> to login again.</p>
+
+<script src="{% static 'js/jquery.popupoverlay.js' %}"></script>
+
+{% endblock %}

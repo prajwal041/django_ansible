@@ -1,0 +1,10 @@
+---
+- name: install dependencies
+  hosts: all
+  become: true
+
+  tasks:
+    - pip3:
+        name: django
+    - pip3:
+        name: gunicorn

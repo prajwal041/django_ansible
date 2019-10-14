@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head_title %} Welcome |  {% endblock %}
+
+{% block mypage %}
+
+    <style>
+.field {
+    width: 80%;
+    margin: 0 auto;
+}
+.left {
+    width: 20%;
+    text-align: right;
+    display: block;
+    float: left;
+    margin-right: 5%;
+}
+</style>
+
+<form class="form-inline" action="" method="post">{% csrf_token %}
+        <h3>Enter the details: Name should be unique..</h3>
+
+        <div class="row">
+  			<div class="col-sm-1" style="background-color:lavender;"><label for="name">Name</label></div>
+			<div class="col-sm-2"><input class="form-control" type="text" name="name" required autofocus></div>
+        </div>
+        <div class="row">
+			<div class="col-sm-1" style="background-color:lavender;"><label for="favcolor">Favourite Color</label></div>
+			<div class="col-sm-2"><input class="form-control" type="text" name="favcolor" required autofocus></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2" style="background-color:lavender;"><label for="pet">Pet</label></div>
+			<div class="col-sm-2">
+                <select class="form-control input-sm" name="pet" required autofocus>
+                    <option value="" selected disabled hidden>Choose your option</option>
+                    <option value="1">Cat</option>
+                    <option value="2">Dog</option>
+
+                </select>
+            </div>
+        </div>
+    <button type="submit" class="btn btn-primary btn-sm search" >SUBMIT</button>
+
+</form>
+
+
+
+
+
+
+<script src="{% static 'js/jquery.popupoverlay.js' %}"></script>
+
+{% endblock %}

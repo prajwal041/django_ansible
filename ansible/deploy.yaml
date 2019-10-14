@@ -1,7 +1,7 @@
 ---
 - hosts: all
   become: yes
-  become_user: ubuntu
+  become_user: prajshet
   gather_facts: no
 
   tasks:
@@ -12,32 +12,33 @@
       accept_hostkey=yes
 
 - hosts: all
-  gather_facts: no
-  tasks:
-  - name: install python requirements
-    pip: requirements={{ repo_dir }}/requirements/production.txt extra_args=--upgrade
-
-- hosts: all
   become: yes
-  become_user: ubuntu
+  become_user: prajshet
   gather_facts: no
   environment:
-    DJANGO_SETTINGS_MODULE: "{{ django_project }}.settings.production"
-    DATABASE_URL: postgres://{{ dbuser }}:{{ dbpassword }}@localhost/{{ dbname }}
     STATIC_ROOT: "{{ static_dir }}"
 
   tasks:
   - name: create static_root dir
-    file: path={{ static_dir }} state=directory mode=0755
-  - name: django collectstatic
-    shell: ./manage.py collectstatic --noinput chdir={{ django_dir }}
+    file: path={{ static_dir }} state=directory mode=0777
   - name: django migrate
-    shell: ./manage.py migrate --noinput chdir={{ django_dir }}
-  - name: django loaddata
-    shell: ./manage.py loaddata user chdir={{ django_dir }}
+    shell: python manage.py migrate --noinput chdir={{ repo_dir }}
+
+
+- hosts: all
+  sudo: yes
+  gather_facts: no
+  tasks:
+  - name: supervisor restart
+    shell: supervisorctl reread
+  - name: supervisor update
+    shell: supervisorctl update
+  - name: nginx test service
+    shell: nginx -t
 
 - hosts: all
   gather_facts: no
   tasks:
-  - name: uwsgi restart
-    service: name=uwsgi state=restarted
+  - name: nginx restart
+    service: name=nginx state=restarted
+

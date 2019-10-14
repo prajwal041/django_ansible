@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head_title %} Welcome |  {% endblock %}
+
+{% block valid %}
+ <style>
+    #table1,#table21,#table22,#table23,#table24,#table25,#table2,#table211,#table212,#table213,#table214,#table215,#table216,#table217,#table218,#table219,#table31,#table32,#table33, #table4, #table5 {
+    display: none;
+}
+    </style>
+
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<form class="form-inline" action="" method="post">{% csrf_token %}
+
+</form>
+
+
+   <form class="form-inline" action="" method="post">{% csrf_token %}
+        <h3>Our services</h3>
+
+        <div class="row">
+
+			<button type="submit" class="btn btn-primary btn-sm search" >Estimates </button>
+            <button type="submit" class="btn btn-primary btn-sm search" >Invoices </button>
+            <button type="submit" class="btn btn-primary btn-sm search" >Clients </button>
+            <button type="submit" class="btn btn-primary btn-sm search" >Joinst Pro </button>
+            <button type="submit" class="btn btn-primary btn-sm search" >Settings </button>
+        </div>
+</form>
+
+
+ <body>
+<!-- List of uploaded documents -->
+<h3>Upload the Documents</h3>
+        <!-- Upload form. Note enctype attribute! -->
+        <form class="form-inline" action="" method="post" enctype="multipart/form-data">
+			<div class="form-group">
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+            <ul>
+                <h4><p>For Instructions click <a href="/help/">here</a></p></h4>
+            </ul>
+            <p>
+                {{ form.docfile }}
+            </p>
+            <p><input type="submit" value="Upload" /></p>
+			</div>
+        </form>
+    </body>
+{% endblock %}

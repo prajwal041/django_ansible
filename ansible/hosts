@@ -1,14 +1,11 @@
 all:
     hosts:
-        yourserver
+        ec2-18-224-181-137.us-east-2.compute.amazonaws.com
     vars:
-        repo_url: ssh://git@bitbucket.org/youruser
-        repo: yourproject
-        home_dir: /home/ubuntu
+        repo_url: git@github.com:prajwal041/
+        repo: AwsDemo
+        home_dir: /home/prajshet
         repo_dir: "{{ home_dir }}/{{ repo }}"
-        django_dir: "{{ repo_dir }}/django"
-        static_dir: "{{ home_dir }}/static"
-        django_project: yourproject
-        dbname: django
-        dbuser: django
-        dbpassword: "{{ lookup('password', 'postgresqlpasswd') }}"
+        django_dir: "{{ repo_dir }}/ormuco1"
+        static_dir: "{{ django_dir }}/static"
+        django_project: AwsDemo
