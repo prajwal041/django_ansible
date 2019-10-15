@@ -35,6 +35,10 @@ Clone the template repository
 I prepared a template repository of a Django project, you can clone it at the following address before proceeding:
 `git clone https://github.com/prajwal041/django_ansible.git`
 
+create virtual environment `env`
+clone the `AwsDemo` django project in the multiple slave instance's
+`git clone https://github.com/prajwal041/AwsDemo.git`
+
 ## ansible
 In this directory you’ll find the most interesting part, that is a set of Ansible playbooks to automate the installation and configuration of the server and the deployment of your project.
 
@@ -47,7 +51,7 @@ Then you can proceed to rename the file host_vars/yourserver, using the label yo
 Here is a brief description of each playbook you’ll find:
 
 `config_files.yaml` – Copy nginx and gunicorn configuration files on remote server.
-`deploy.yaml` – Deploy your Django project on the server, pulling the master branch from your Git repository, installing all needed production requirements, running migrate and restarting supervisor & nginx.
+`deploy.yaml` – Deploy your Django project on the server, installing all needed production requirements, running migrate and restarting supervisor & nginx.
 `requirement.yaml` – Install needed software packages on remote server using pip3.
 `packages.yaml` – Install needed software packages on remote server using apt.
 `system.yaml` – Create an user(prajshet) on remote server, together with a private/public SSH key pair. The public key is returned as output when you run the playbook, to be used as a “deploy key” on the server. More details later on this step.
@@ -72,6 +76,7 @@ ok: [yourserver] => {
  "msg": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1kvkW9... ansible-generated on yourserver.example.com\n"
 }
 
+Also check `cat ~/.ssh/id_rsa.pub` for existing public key in master server
 What you find in the msg variable is the public SSH key generated for the (prajshet) user on remote server. You should copy the public key and add it as a “deploy key” in the settings of your Git repository.
 
 A deploy key is a read-only SSH key that will be used to clone your repository from the remote server. You can find more details in the Github documentation.

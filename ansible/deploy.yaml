@@ -4,13 +4,6 @@
   become_user: prajshet
   gather_facts: no
 
-  tasks:
-  - name: pull branch master
-    git:
-      repo={{ repo_url }}/{{ repo }}.git
-      dest={{ repo_dir }}
-      accept_hostkey=yes
-
 - hosts: all
   become: yes
   become_user: prajshet
