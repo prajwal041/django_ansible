@@ -6,6 +6,7 @@ from .models import Domain
 def logout(request):
     return render_to_response('logout.html')
 
+# ans views 
 @ensure_csrf_cookie
 @csrf_exempt
 def ansviews(request, template_name='mypage.html'):
