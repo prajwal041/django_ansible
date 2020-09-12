@@ -1,3 +1,5 @@
+# Author : Prajwal Shetty
+
 from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt,csrf_protect,ensure_csrf_cookie
 from .models import Domain
